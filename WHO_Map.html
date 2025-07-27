@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WHO | Necronyl Outbreak Situation Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans Condensed', 'Segoe UI', 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #212121;
+    }
+
+    header {
+      background-color: #0072c6;
+      color: white;
+      padding: 20px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      border-bottom: 5px solid #d32f2f;
+    }
+
+    header img {
+      height: 60px;
+      margin-right: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8em;
+    }
+
+    nav.main-nav {
+      background-color: #005ea2;
+      text-align: center;
+      padding: 0.8em 0;
+    }
+
+    nav.main-nav a {
+      display: inline-block;
+      margin: 0 1em;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1em;
+      padding: 0.5em 0.8em;
+    }
+
+    nav.main-nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+
+    section {
+      margin-bottom: 3em;
+    }
+
+    h2 {
+      color: #0072c6;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3em;
+    }
+
+    .map-container {
+      text-align: center;
+      margin: 2em 0;
+    }
+
+    .map-container img {
+      max-width: 100%;
+      border: 2px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .legend {
+      background: white;
+      padding: 1.5em;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-left: 5px solid #0072c6;
+      margin-top: 2em;
+      line-height: 1.8;
+    }
+
+    footer {
+      background-color: #f0f0f0;
+      color: #666;
+      text-align: center;
+      padding: 1em;
+      font-size: 0.9em;
+      margin-top: 3em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <img src="https://files.catbox.moe/h9ehi7.png" alt="WHO Logo">
+  <h1>Situation Map | Necronyl Global Health Emergency</h1>
+</header>
+
+<!-- Navigation -->
+<nav class="main-nav">
+  <a href="WHO_Index.html">Home</a>
+  <a href="WHO_Map.html">Situation Map</a>
+  <a href="WHO_Stats.html">Country Statistics</a>
+  <a href="WHO_Timeline.html">Outbreak Timeline</a>
+  <a href="UN_Factions.html">Outbreak Factions (UN)</a>
+</nav>
+
+<!-- Main Content -->
+<main>
+  <section>
+    <h2>Global Outbreak Visualization</h2>
+    <p>The following map represents the global status of the Necronyl outbreak as of July 2027. Colors correspond to current control levels and communication status by region.</p>
+
+    <div class="map-container">
+      <img src="https://files.catbox.moe/3qn4qw.png" alt="Global Necronyl Infection Map">
+    </div>
+
+    <div class="legend">
+      <span><strong>🟩 Green – Safe Bastions (Infection Controlled)</strong></span><br>
+      <span><strong>🟧 Orange – Contested Zones (Unstable / Conflict Ongoing)</strong></span><br>
+      <span><strong>🟥 Red – Overrun Zones (Infected Control)</strong></span><br>
+      <span><strong>⚫ Black – Collapsed / Unknown (No Contact)</strong></span>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  © 2027 World Health Organization (Fictional Simulation). WHO EchoNet System – Version 3.0.
+</footer>
+
+</body>
+</html>

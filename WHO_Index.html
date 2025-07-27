@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WHO | Necronyl Global Health Emergency</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans Condensed', 'Segoe UI', 'Arial', sans-serif;      background-color: #f4f4f4;
+      color: #212121;
+    }
+
+    header {
+      background-color: #0072c6;
+      color: white;
+      padding: 20px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      border-bottom: 5px solid #d32f2f;
+    }
+
+    header img {
+      height: 60px;
+      margin-right: 20px;
+    }
+
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8em;
+    }
+
+    header p {
+      font-size: 1em;
+      margin-top: 0.5em;
+    }
+
+    nav.main-nav {
+      background-color: #005ea2;
+      text-align: center;
+      padding: 0.8em 0;
+    }
+
+    nav.main-nav a {
+      display: inline-block;
+      margin: 0 1em;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1em;
+      padding: 0.5em 0.8em;
+    }
+
+    nav.main-nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+
+    section {
+      margin-bottom: 3em;
+    }
+
+    h2 {
+      color: #0072c6;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3em;
+    }
+
+    ul {
+      padding-left: 1.5em;
+      line-height: 1.6;
+    }
+
+    blockquote {
+      border-left: 4px solid #ccc;
+      padding-left: 1em;
+      font-style: italic;
+      color: #333;
+    }
+
+    footer {
+      background-color: #f0f0f0;
+      color: #666;
+      text-align: center;
+      padding: 1em;
+      font-size: 0.9em;
+      margin-top: 3em;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup {
+      background: white;
+      color: #333;
+      max-width: 500px;
+      padding: 2em;
+      border-radius: 6px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .popup h2 {
+      color: #d32f2f;
+      margin-bottom: 1em;
+    }
+
+    .popup button {
+      margin-top: 1.5em;
+      padding: 0.7em 2em;
+      background: #0072c6;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .popup button:hover {
+      background: #005ea2;
+    }
+    
+    .status-red {
+      color: #d32f2f;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    function closePopup() {
+      document.getElementById('popupOverlay').style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+
+<!-- Disclaimer Popup -->
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup">
+    <h2>⚠️ Disclaimer</h2>
+    <p>This is a fictional webpage for storytelling and design purposes. It does not represent actual World Health Organization policy, data, or advice.</p>
+    <p>The Necronyl outbreak, persons, and events described are entirely fictional.</p>
+    <button onclick="closePopup()">I Understand</button>
+  </div>
+</div>
+
+<!-- Header with WHO Logo -->
+  <!-- Header -->
+  <header>
+    <img src="https://files.catbox.moe/h9ehi7.png" alt="WHO Logo">
+    <h1>Necronyl Emergency Response</h1>
+  </header>
+
+<!-- Top navigation (like WHO.org) -->
+<nav class="main-nav">
+  <a href="WHO_Index.html">Home</a>
+  <a href="WHO_Map.html">Situation Map</a>
+  <a href="WHO_Stats.html">Country Statistics</a>
+  <a href="WHO_Timeline.html">Outbreak Timeline</a>
+  <a href="UN_Factions.html">Outbreak Factions (UN)</a>
+</nav>
+
+<main>
+  <section>
+    <h2>Current Situation Overview</h2>
+    <p>In March 2025, the pharmaceutical compound Necronyl was distributed globally as a promising universal cancer treatment. Within weeks, clinical irregularities were reported in patients including cognitive degradation, unregulated tissue regeneration, and loss of self-awareness.</p>
+
+    <p>The pathogen—believed to be a mutation caused by Necronyl's synthetic immune modulation—spreads via exposure to infected blood or bodily fluids. Evidence suggests rapid adaptation and possible airborne mutations under specific conditions.</p>
+
+    <ul>
+ <li><strong>Status:</strong> <span class="status-red">GLOBAL PANDEMIC — PHASE 6</span></li>
+        <li><strong>Mortality Rate:</strong> Unknown (victims are functionally undead, not deceased)</li>
+        <li><strong>Global Spread:</strong> Confirmed in 191 countries</li>
+        <li><strong>Transmission Method:</strong> Blood-borne; bite contact; possible airborne vector under investigation</li>
+        <li><strong>Estimated Infected:</strong> 4.3 billion (as of Dec 2026)</li>
+  </section>
+
+  <section>
+    <h2>WHO Emergency Response Measures</h2>
+    <ul>
+      <li>Emergency activation of GOARN and EMT networks</li>
+      <li>Containment support through Quarantine Control Zones (QCZ)</li>
+      <li>Ceasing non-critical WHO initiatives in infected zones</li>
+      <li>Global remote bio-surveillance and mutation tracking</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Message from the Director-General</h2>
+    <blockquote>
+      “The Necronyl crisis challenges every principle of global health response. We urge immediate isolation of outbreak vectors and strict adherence to field quarantine. While much has been lost, global cooperation continues.”<br><br>
+      — Dr. Elena Mbeki, WHO Director-General<br>
+      (Broadcast: April 2027)
+    </blockquote>
+  </section>
+</main>
+
+<footer>
+  © 2027 World Health Organization (Fictional Simulation). WHO EchoNet System – Version 3.0.
+</footer>
+
+</body>
+</html>

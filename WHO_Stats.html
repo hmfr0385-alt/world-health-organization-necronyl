@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WHO | Necronyl Global Health Emergency - Statistics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans Condensed', 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #212121;
+    }
+    header {
+      background-color: #0072c6;
+      color: white;
+      padding: 20px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      border-bottom: 5px solid #d32f2f;
+    }
+    header img {
+      height: 60px;
+      margin-right: 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8em;
+    }
+    main {
+      max-width: 1200px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+    h2 {
+      color: #0072c6;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
+    }
+    canvas {
+      margin: 2em 0;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #f0f0f0;
+      color: #666;
+      text-align: center;
+      padding: 1em;
+      font-size: 0.9em;
+      margin-top: 3em;
+    }
+    
+    nav.main-nav {
+      background-color: #005ea2;
+      text-align: center;
+      padding: 0.8em 0;
+    }
+
+    nav.main-nav a {
+      display: inline-block;
+      margin: 0 1em;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1em;
+      padding: 0.5em 0.8em;
+    }
+
+    nav.main-nav a:hover {
+      text-decoration: underline;
+    }
+    
+        table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5em;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    th, td {
+      padding: 0.8em 1em;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #e0efff;
+      color: #003c6c;
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    footer {
+      background-color: #f0f0f0;
+      color: #666;
+      text-align: center;
+      padding: 1em;
+      font-size: 0.9em;
+      margin-top: 3em;
+    }
+
+    .status-red {
+      color: #d32f2f;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://files.catbox.moe/h9ehi7.png" alt="WHO Logo" />
+    <h1>Necronyl Infection Statistics</h1>
+  </header>
+  
+  <nav class="main-nav">
+  <a href="WHO_Index.html">Home</a>
+  <a href="WHO_Map.html">Situation Map</a>
+  <a href="WHO_Stats.html">Country Statistics</a>
+  <a href="WHO_Timeline.html">Outbreak Timeline</a>
+  <a href="UN_Factions.html">Outbreak Factions (UN)</a>
+</nav>
+
+  <main>
+    <h2>Global Survivor & Infection Trends</h2>
+    <canvas id="globalChart" width="800" height="400"></canvas>
+
+    <h2>Country-Level Infection Curves</h2>
+    <canvas id="countryChart" width="1000" height="500"></canvas>
+  </main>
+  
+<main>
+    <h2>Summary Statistics</h2>
+  <table>
+    <tr><th>Metric</th><th>Value</th></tr>
+    <tr><td>Total Infected</td><td>~4.3 billion</td></tr>
+    <tr><td>Confirmed Undead</td><td>~3.9 billion</td></tr>
+    <tr><td>Estimated Survivors</td><td>~600 million</td></tr>
+    <tr><td>Global Population (2026)</td><td>~8.1 billion</td></tr>
+    <tr><td>Mortality (Functional)</td><td><span class="status-red">~99.9%</span></td></tr>
+  </table>
+</main>
+
+  <footer>
+    © 2027 World Health Organization (Fictional Simulation). WHO EchoNet System – Version 3.0.
+  </footer>
+
+  <script>
+    const labels = [
+      "Mar 2025", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+      "Jan 2026", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+      "Jan 2027", "Feb", "Mar", "Apr"
+    ];
+
+    function jitterData(baseValues, jitterAmount) {
+      return baseValues.map((val, idx) => {
+        let noise = (Math.sin(idx*0.7) + Math.cos(idx*1.3*idx*0.1)) * jitterAmount * val * 0.1;
+        let spike = (Math.random() < 0.15) ? val * (0.05 + Math.random()*0.1) : 0;
+        let dip = (Math.random() < 0.1) ? -val * (0.03 + Math.random()*0.05) : 0;
+        let jittered = val + noise + spike + dip;
+        return Math.max(0, Math.round(jittered));
+      });
+    }
+
+    // Global data unchanged (kept same for reference)
+    const baseGlobalInfected = [
+      500000, 2000000, 7000000, 25000000, 100000000, 250000000,
+      500000000, 1000000000, 1600000000, 2100000000,
+      2500000000, 2800000000, 3000000000, 3300000000, 3550000000, 3700000000,
+      3900000000, 4050000000, 4200000000, 4280000000, 4300000000, 4310000000,
+      4320000000, 4325000000, 4330000000, 4335000000
+    ];
+    const baseGlobalSurvivors = [
+      8000000000, 7950000000, 7850000000, 7600000000, 7200000000, 6800000000,
+      6000000000, 5000000000, 4200000000, 3700000000,
+      3200000000, 2900000000, 2700000000, 2400000000, 2100000000, 1800000000,
+      1500000000, 1200000000, 1000000000, 800000000, 600000000, 500000000,
+      400000000, 300000000, 200000000, 100000000
+    ];
+    const globalInfected = jitterData(baseGlobalInfected, 0.15);
+    const globalSurvivors = jitterData(baseGlobalSurvivors, 0.1);
+
+    // Base infection estimates for 10 countries (in millions)
+    const baseUSA = [
+      10000, 50000, 400000, 10000000, 60000000, 110000000, 170000000, 190000000, 192000000, 192000000,
+      192000000, 192000000, 192000000, 192000000, 192000000, 192000000, 192000000, 192000000, 192000000, 192000000,
+      192000000, 192000000, 192000000, 192000000, 192000000, 192000000
+    ];
+    const baseIndia = [
+      2000, 10000, 50000, 200000, 500000, 1500000, 7000000, 20000000, 70000000, 150000000,
+      250000000, 350000000, 450000000, 550000000, 650000000, 700000000, 750000000, 770000000, 780000000, 790000000,
+      795000000, 800000000, 800000000, 800000000, 800000000, 800000000
+    ];
+    const baseBrazil = [
+      1000, 5000, 20000, 100000, 700000, 10000000, 50000000, 90000000, 110000000, 115000000,
+      110000000, 120000000, 140000000, 160000000, 165000000, 165000000, 165000000, 165000000, 165000000, 165000000,
+      165000000, 165000000, 165000000, 165000000, 165000000, 165000000
+    ];
+    const baseRussia = [
+      10000, 1000000, 5000000, 20000000, 50000000, 80000000, 100000000, 105000000, 107000000, 107000000,
+      107000000, 107000000, 107000000, 107000000, 107000000, 107000000, 107000000, 107000000, 107000000, 107000000,
+      107000000, 107000000, 107000000, 107000000, 107000000, 107000000
+    ];
+    const baseGermany = [
+      500, 1000, 5000, 30000, 100000, 1000000, 8000000, 20000000, 40000000, 60000000,
+      65000000, 68000000, 70000000, 72000000, 74000000, 75000000, 75500000, 75700000, 75800000, 75900000,
+      76000000, 76000000, 76000000, 76000000, 76000000, 76000000
+    ];
+
+    const baseMexico = [
+      3000, 15000, 60000, 250000, 800000, 4000000, 15000000, 35000000, 60000000, 90000000,
+      105000000, 110000000, 115000000, 118000000, 119000000, 119500000, 120000000, 120300000, 120500000, 120700000,
+      120900000, 121000000, 121000000, 121000000, 121000000, 121000000
+    ];
+    const baseSouthAfrica = [
+      500, 2000, 9000, 35000, 120000, 500000, 2000000, 7000000, 15000000, 25000000,
+      32000000, 35000000, 38000000, 40000000, 41000000, 41500000, 42000000, 42200000, 42400000, 42600000,
+      42800000, 42900000, 42950000, 43000000, 43050000, 43100000
+    ];
+    const baseJapan = [
+      1000, 6000, 20000, 80000, 150000, 300000, 700000, 2000000, 5000000, 9000000,
+      12000000, 14000000, 16000000, 17000000, 17500000, 17800000, 18000000, 18200000, 18300000, 18400000,
+      18500000, 18550000, 18600000, 18630000, 18660000, 18700000
+    ];
+    const baseUK = [
+      2000, 10000, 45000, 150000, 500000, 2000000, 8000000, 15000000, 20000000, 21000000,
+      21000000, 21500000, 22000000, 22500000, 22700000, 22800000, 22900000, 22950000, 23000000, 23050000,
+      23100000, 23120000, 23140000, 23160000, 23180000, 23200000
+    ];
+    const baseAustralia = [
+      500, 2000, 7000, 25000, 70000, 200000, 500000, 1200000, 2500000, 4500000,
+      6000000, 6500000, 7000000, 7400000, 7600000, 7700000, 7800000, 7900000, 7950000, 8000000,
+      8050000, 8070000, 8100000, 8120000, 8150000, 8180000
+    ];
+
+    const usa = jitterData(baseUSA, 0.35);
+    const india = jitterData(baseIndia, 0.4);
+    const brazil = jitterData(baseBrazil, 0.3);
+    const russia = jitterData(baseRussia, 0.25);
+    const germany = jitterData(baseGermany, 0.28);
+    const mexico = jitterData(baseMexico, 0.32);
+    const southAfrica = jitterData(baseSouthAfrica, 0.3);
+    const japan = jitterData(baseJapan, 0.3);
+    const uk = jitterData(baseUK, 0.33);
+    const australia = jitterData(baseAustralia, 0.29);
+
+    const globalChart = new Chart(
+      document.getElementById('globalChart'),
+      {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Infected (Estimated)',
+              data: globalInfected,
+              borderColor: '#d32f2f',
+              backgroundColor: 'rgba(211, 47, 47, 0.3)',
+              fill: true,
+              tension: 0.4,
+              pointRadius: 3,
+              pointHoverRadius: 5,
+            },
+            {
+              label: 'Survivors (Estimated)',
+              data: globalSurvivors,
+              borderColor: '#0072c6',
+              backgroundColor: 'rgba(0, 114, 198, 0.3)',
+              fill: true,
+              tension: 0.4,
+              pointRadius: 3,
+              pointHoverRadius: 5,
+            }
+          ],
+        },
+        options: {
+          responsive: true,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          stacked: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Global Estimated Infected vs Survivors Over Time',
+              font: { size: 18 }
+            },
+            tooltip: {
+              callbacks: {
+                label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString(),
+              }
+            }
+          },
+          scales: {
+            y: {
+              type: 'linear',
+              beginAtZero: true,
+              ticks: {
+                callback: val => val.toLocaleString()
+              }
+            }
+          }
+        }
+      }
+    );
+
+    const countryChart = new Chart(
+      document.getElementById('countryChart'),
+      {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            { label: 'USA', data: usa, borderColor: '#ff3b3b', backgroundColor: 'rgba(255, 59, 59, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'India', data: india, borderColor: '#3b83ff', backgroundColor: 'rgba(59, 131, 255, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'Brazil', data: brazil, borderColor: '#3bff82', backgroundColor: 'rgba(59, 255, 130, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'Russia', data: russia, borderColor: '#ffad3b', backgroundColor: 'rgba(255, 173, 59, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'Germany', data: germany, borderColor: '#9b3bff', backgroundColor: 'rgba(155, 59, 255, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'Mexico', data: mexico, borderColor: '#ff61a6', backgroundColor: 'rgba(255, 97, 166, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'South Africa', data: southAfrica, borderColor: '#00c853', backgroundColor: 'rgba(0, 200, 83, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'Japan', data: japan, borderColor: '#0091ea', backgroundColor: 'rgba(0, 145, 234, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'UK', data: uk, borderColor: '#d500f9', backgroundColor: 'rgba(213, 0, 249, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 },
+            { label: 'Australia', data: australia, borderColor: '#ff6d00', backgroundColor: 'rgba(255, 109, 0, 0.3)', fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4 }
+          ],
+        },
+        options: {
+          responsive: true,
+          interaction: {
+            mode: 'nearest',
+            intersect: false,
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Estimated Infection Evolution by Country',
+              font: { size: 18 }
+            },
+            tooltip: {
+              callbacks: {
+                label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString(),
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: val => val.toLocaleString()
+              }
+            }
+          }
+        }
+      }
+    );
+  </script>
+</body>
+</html>
