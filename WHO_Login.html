@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WHO Login - Necronyl Research</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column; /* Ensure everything is stacked vertically */
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #0072c6;
+    }
+
+    .form-group {
+      margin: 15px 0;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .login-button {
+      background-color: #0072c6;
+      color: white;
+      font-size: 1.1rem;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .login-button:hover {
+      background-color: #005ea2;
+    }
+
+    .error-message {
+      color: #d32f2f;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    .forgot-password {
+      color: #0072c6;
+      font-size: 0.9rem;
+      text-decoration: none;
+      margin-top: 15px;
+      display: block;
+    }
+
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    /* Adjust logo size */
+    header img {
+      width: 100%; /* Ensure logo is responsive */
+      max-width: 500px;
+      margin-bottom: 20px; /* Add some space below logo */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Logo Section -->
+  <header>
+    <img src="https://files.catbox.moe/ggxei4.png" alt="WHO Logo">
+  </header>
+
+  <!-- Login Form Section -->
+  <div class="login-container">
+    <h2>WHO Login - Necronyl Research Access</h2>
+    <form id="loginForm" onsubmit="return validateLogin()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button type="submit" class="login-button">Log In</button>
+      <p class="error-message" id="error-message"></p>
+    </form>
+    <a href="#" class="forgot-password">Forgot your password?</a>
+  </div>
+
+  <script>
+    // This will simulate a login attempt and redirect to the research page if successful.
+    function validateLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+
+      // Simple validation for a mock login (replace with a real check in production).
+      if (username === 'Livia_ROTH' && password === 'GenevaIsTheBest') {
+        // Redirect to the Necronyl research page if login is successful
+        window.location.href = 'Secret_report1.html';  // You can replace this with the actual page.
+        return false;  // Prevent the form from submitting
+      } else {
+        errorMessage.textContent = 'Invalid username or password. Please try again.';
+        return false;  // Prevent form submission
+      }
+    }
+  </script>
+</body>
