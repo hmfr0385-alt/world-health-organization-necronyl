@@ -133,6 +133,15 @@
       } else {
         errorMessage.textContent = 'Invalid username or password. Please try again.';
         return false;  // Prevent form submission
+
+            // Simple validation for a mock login (replace with a real check in production).
+      if (username === 'Claire_MALAURAY' && password === 'GenomeLock_X-23') {
+        // Redirect to the Necronyl research page if login is successful
+        window.location.href = 'secret_report2.html';  // You can replace this with the actual page.
+        return false;  // Prevent the form from submitting
+      } else {
+        errorMessage.textContent = 'Invalid username or password. Please try again.';
+        return false;  // Prevent form submission
       }
     }
   </script>
