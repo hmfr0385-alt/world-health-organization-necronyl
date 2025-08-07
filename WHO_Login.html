@@ -78,7 +78,6 @@
       text-decoration: none;
       margin-top: 15px;
       display: block;
-      cursor: pointer;
     }
 
     .forgot-password:hover {
@@ -114,40 +113,44 @@
       <button type="submit" class="login-button">Log In</button>
       <p class="error-message" id="error-message"></p>
     </form>
-    <!-- Random Forgot Password Redirection -->
-    <a href="#" class="forgot-password" onclick="return redirectRandom()">Forgot your password? Check here to remember your login.</a>
+
+    <!-- Randomized Forgot Password Link -->
+    <a id="forgot-link" class="forgot-password" target="_blank">
+      Forgot your password? Check here to remember your login.
+    </a>
   </div>
 
-<script>
-  function validateLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const errorMessage = document.getElementById('error-message');
+  <script>
+    // Login simulation
+    function validateLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
 
-    if (username === 'Livia_ROTH' && password === 'GenevaIsTheBest') {
-      window.location.href = 'secret_report1.html';
+      if (username === 'Livia_ROTH' && password === 'GenevaIsTheBest') {
+        window.location.href = 'secret_report1.html';
+        return false;
+      }
+
+      if (username === 'Claire_MALAURAY' && password === 'GenomeLock_X-23') {
+        window.location.href = 'secret_report2.html';
+        return false;
+      }
+
+      errorMessage.textContent = 'Invalid username or password. Please try again.';
       return false;
     }
 
-    if (username === 'Claire_MALAURAY' && password === 'GenomeLock_X-23') {
-      window.location.href = 'secret_report2.html';
-      return false;
-    }
-
-    errorMessage.textContent = 'Invalid username or password. Please try again.';
-    return false;
-  }
-
-  function redirectRandom() {
-    const links = [
-      'https://janitorai.com/characters/95d963c4-d395-4af8-b87f-37566d06a6bd_character-livia-roth',
-      'https://example.com/placeholder-character' // Replace with actual second character when ready
-    ];
-    const randomLink = links[Math.floor(Math.random() * links.length)];
-    window.open(randomLink, '_blank');
-    return false;
-  }
-</script>
+    // Randomize forgot password link on page load
+    window.onload = function () {
+      const links = [
+        'https://janitorai.com/characters/95d963c4-d395-4af8-b87f-37566d06a6bd_character-livia-roth',
+        'https://example.com/placeholder-character' // Replace with real second character when available
+      ];
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      document.getElementById('forgot-link').href = randomLink;
+    };
+  </script>
 
 </body>
 </html>
