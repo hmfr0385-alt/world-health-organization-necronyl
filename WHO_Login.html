@@ -118,30 +118,34 @@
   </div>
 
 <script>
-  // This will simulate a login attempt and redirect to the research page if successful.
   function validateLogin() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const errorMessage = document.getElementById('error-message');
 
-    // First login attempt
     if (username === 'Livia_ROTH' && password === 'GenevaIsTheBest') {
-      // Redirect to the Necronyl research page if login is successful
-      window.location.href = 'secret_report1.html';  // You can replace this with the actual page.
-      return false;  // Prevent the form from submitting
+      window.location.href = 'secret_report1.html';
+      return false;
     }
 
-    // Second login attempt
     if (username === 'Claire_MALAURAY' && password === 'GenomeLock_X-23') {
-      // Redirect to the Necronyl research page if login is successful
-      window.location.href = 'secret_report2.html';  // You can replace this with the actual page.
-      return false;  // Prevent the form from submitting
+      window.location.href = 'secret_report2.html';
+      return false;
     }
 
-    // If both attempts fail, show an error message
     errorMessage.textContent = 'Invalid username or password. Please try again.';
-    return false;  // Prevent form submission
+    return false;
+  }
+
+  function redirectRandom() {
+    const links = [
+      'https://janitorai.com/characters/95d963c4-d395-4af8-b87f-37566d06a6bd_character-livia-roth',
+      'https://janitorai.com/characters/6e402238-8a4a-4fb1-8ae5-2127e2d98961_character-evelyn-hartman' // Replace with real link later
+    ];
+    const randomLink = links[Math.floor(Math.random() * links.length)];
+    window.open(randomLink, '_blank');
   }
 </script>
+
 
 </body>
