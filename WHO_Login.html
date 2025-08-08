@@ -141,15 +141,20 @@
       return false;
     }
 
-    // Randomize forgot password link on page load
-    window.onload = function () {
-      const links = [
-        'https://janitorai.com/characters/95d963c4-d395-4af8-b87f-37566d06a6bd_character-livia-roth',
-        'https://janitorai.com/characters/7c61bd88-0673-4445-9459-b34747681466_character-claire-malauray' // Replace with real second character when available
-      ];
-      const randomLink = links[Math.floor(Math.random() * links.length)];
-      document.getElementById('forgot-link').href = randomLink;
-    };
+// Randomize forgot password link on page load
+window.onload = function () {
+  const links = [
+    'https://janitorai.com/characters/95d963c4-d395-4af8-b87f-37566d06a6bd_character-livia-roth',
+    'https://janitorai.com/characters/7c61bd88-0673-4445-9459-b34747681466_character-claire-malauray' // Replace with real second character when available
+  ];
+
+  // Randomly choose a link from the array
+  const randomLink = links[Math.floor(Math.random() * links.length)];
+
+  // Set the href of the "forgot-link" element
+  document.getElementById('forgot-link').href = randomLink;
+};
+
   </script>
 
 </body>
